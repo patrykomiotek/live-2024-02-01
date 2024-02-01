@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@jobboard/common-ui": ["libs/common-ui/src/index.ts"]
+      "@jobboard/common-ui": ["libs/common-ui/src/index.ts"],
+      "@jobboard/prisma-client": ["libs/prisma-client/src/index.ts"],
+      "@jobboard/prisma-schema": ["libs/prisma-schema/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
