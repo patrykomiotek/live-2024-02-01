@@ -3,12 +3,9 @@ import { NavBar } from '../../components/NavBar';
 
 type Props = {
   children: React.ReactNode;
-  mobile: React.ReactNode;
-  desktop: React.ReactNode;
-  // admin: React.ReactNode;
 };
 
-export default function PublicLayout({ children, mobile, desktop }: Props) {
+export default function PublicLayout({ children }: Props) {
   const headersList = headers();
   const deviceHeader = headersList.get('x-device');
 
