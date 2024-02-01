@@ -9,7 +9,9 @@ type Props = LinkProps & { children: string }; // LinkProps
 
 export const NavLink = ({ href, children, ...props }: Props) => {
   const currentPath = usePathname();
-  const isActive = currentPath.includes(href.toString());
+  // const isActive = currentPath.includes(href.toString());
+  const isActive = currentPath === href;
+
   return (
     <Link
       href={href}
