@@ -18,7 +18,14 @@ export default async function JobOffersPage() {
       <Link href="/job-offers/create">Create offer</Link>
       {jobOffers.map((offer) => (
         <div key={offer.public_id} className="my-4">
-          <h2 className="font-bold text-2xl">{offer.title}</h2>
+          <h2 className="font-bold text-2xl">
+            <Link
+              href={`/job-offers/${offer.public_id}`}
+              className="text-blue-600"
+            >
+              {offer.title}
+            </Link>
+          </h2>
           <p>{offer.description}</p>
           <p>Salary: {offer.salary} PLN</p>
         </div>

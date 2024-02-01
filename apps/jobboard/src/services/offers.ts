@@ -1,3 +1,4 @@
+import { JobOffer } from '@prisma/client';
 import db from '@jobboard/prisma-client';
 
 export const fetchJobOffers = async () => {
@@ -9,4 +10,8 @@ export const fetchJobOffers = async () => {
       salary: true,
     },
   });
+};
+
+export const fetchOffer = async (publicId: JobOffer['public_id']) => {
+  return db.jobOffer.findUnique({ where: { public_id: publicId } });
 };
