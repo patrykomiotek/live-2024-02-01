@@ -1,4 +1,3 @@
-import { headers } from 'next/headers';
 import { NavBar } from '../../components/NavBar';
 
 type Props = {
@@ -6,11 +5,6 @@ type Props = {
 };
 
 export default function PublicLayout({ children }: Props) {
-  const headersList = headers();
-  const deviceHeader = headersList.get('x-device');
-
-  // fetch customer name, customerRecord ect.
-
   return (
     <>
       <div className="mx-auto bg-slate-900 py-2">
