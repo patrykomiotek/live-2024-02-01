@@ -17,6 +17,6 @@ model JobOffer {
   description String
   position    String
   salary      Float
-  employer    String
+  company     String
   city        String? @db.VarChar(100)
 }
