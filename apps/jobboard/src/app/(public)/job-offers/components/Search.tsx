@@ -27,7 +27,11 @@ export const Search = () => {
 
   return (
     <div>
-      <Input label="Search" onChange={handleChange} />
+      <Input
+        label="Search"
+        onChange={handleChange}
+        defaultValue={searchParams.get('query')?.toString()}
+      />
     </div>
   );
 };
