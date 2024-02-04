@@ -2,15 +2,31 @@ import { Metadata } from 'next';
 
 import { Header } from '@jobboard/common-ui';
 
-import { fetchJobOffers } from '../../../services/offers';
+import { fetchJobOffers, fetchOffersCount } from '../../../services/offers';
 import Link from 'next/link';
+import { Search } from './components/Search';
+import { OffersCount } from './components/OffersCount';
+import { OffersList } from './components/OffersList';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Job Offers',
 };
 
-export default async function JobOffersPage() {
-  const jobOffers = await fetchJobOffers();
+type Params = {
+  searchParams?: {
+    query?: string;
+  };
+};
+
+export default async function JobOffersPage({ searchParams }: Params) {
+  const query = searchParams?.query || null;
+
+  // const jobOffers = await fetchJobOffers(query); // 10sec.
+  // const offersCount = await fetchOffersCount(); // 5sec.
+  // Loading... 15sek
+
+  console.log({ searchParams });
 
   return (
     <div>
@@ -23,20 +39,16 @@ export default async function JobOffersPage() {
           Create offer
         </Link>
       </div>
-      {jobOffers.map((offer) => (
-        <div key={offer.public_id} className="my-6">
-          <h2 className="font-bold text-2xl">
-            <Link
-              href={`/job-offers/${offer.public_id}`}
-              className="text-blue-600"
-            >
-              {offer.title}
-            </Link>
-          </h2>
-          <p className="leading-8">{offer.description}</p>
-          <p className="leading-8">Salary: {offer.salary} PLN</p>
-        </div>
-      ))}
+
+      <Suspense fallback={<p>Count loading...</p>}>
+        <OffersCount />
+      </Suspense>
+
+      <Search />
+
+      <Suspense fallback={<p>List loading...</p>}>
+        <OffersList query={query} />
+      </Suspense>
     </div>
   );
 }
