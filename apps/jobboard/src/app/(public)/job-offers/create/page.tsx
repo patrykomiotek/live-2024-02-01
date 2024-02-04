@@ -33,7 +33,7 @@ export default function CreateOfferPage() {
   return (
     <div>
       <Header>Create Offer</Header>
-      <form onSubmit={handleSubmit(handleOfferFormSubmit)}>
+      <form onSubmit={handleSubmit(handleOfferFormSubmit)} className="mt-6">
         <Input label="Title" {...register('title')} error={errors.title} />
         <Input
           label="Description"

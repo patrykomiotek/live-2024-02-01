@@ -15,9 +15,16 @@ export default async function JobOffersPage() {
   return (
     <div>
       <Header>Job Offers</Header>
-      <Link href="/job-offers/create">Create offer</Link>
+      <div className="mb-6">
+        <Link
+          href="/job-offers/create"
+          className="underline hover:text-base text-blue-600"
+        >
+          Create offer
+        </Link>
+      </div>
       {jobOffers.map((offer) => (
-        <div key={offer.public_id} className="my-4">
+        <div key={offer.public_id} className="my-6">
           <h2 className="font-bold text-2xl">
             <Link
               href={`/job-offers/${offer.public_id}`}
@@ -26,8 +33,8 @@ export default async function JobOffersPage() {
               {offer.title}
             </Link>
           </h2>
-          <p>{offer.description}</p>
-          <p>Salary: {offer.salary} PLN</p>
+          <p className="leading-8">{offer.description}</p>
+          <p className="leading-8">Salary: {offer.salary} PLN</p>
         </div>
       ))}
     </div>
