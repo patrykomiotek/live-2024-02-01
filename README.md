@@ -14,6 +14,10 @@ install dependencies:
 
 `npm install`
 
+Prepare two files - one in root directory `.env.local` and one in `apps/jobboard/.env.local` with database DSN:
+
+`DATABASE_URL=postgres://postgres:pass123@localhost:5432/jobboard`
+
 generate types:
 
 `npx nx run prisma-schema:generate-types`
