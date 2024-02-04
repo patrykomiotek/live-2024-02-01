@@ -1,5 +1,6 @@
 import { JobOffer } from '@prisma/client';
 import db from '@jobboard/prisma-client';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const fetchJobOffers = async (query: string | null) => {
   const whereQuery = query
@@ -33,5 +34,6 @@ const wait = async (ms: number) =>
 
 export const fetchOffersCount = async () => {
   await wait(5000);
+  // noStore(); -- omit data store
   return db.jobOffer.count();
 };
