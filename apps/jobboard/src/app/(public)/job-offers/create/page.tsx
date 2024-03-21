@@ -18,7 +18,7 @@ export default function CreateOfferPage() {
     resolver: zodResolver(offerSchema),
   });
   const router = useRouter();
-  const [_transition, setTransition] = useTransition();
+  const [isPending, setTransition] = useTransition();
 
   const handleOfferFormSubmit = async (data: CreateOfferDto) => {
     // console.log({ data });
