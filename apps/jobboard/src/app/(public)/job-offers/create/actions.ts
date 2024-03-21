@@ -2,7 +2,7 @@
 
 import db from '@jobboard/prisma-client';
 import { redirect } from 'next/navigation';
-import { CreateOfferDto, offerSchema } from './types';
+import { CreateOfferDto, createOfferSchema } from './types';
 import { ZodError } from 'zod';
 
 // export const createJobOfferAction = async (data: FormData) => {
@@ -26,7 +26,7 @@ export const createJobOfferAction = async (data: CreateOfferDto) => {
   // });
 
   try {
-    const offer = offerSchema.parse(data);
+    const offer = createOfferSchema.parse(data);
 
     await db.jobOffer.create({ data: offer });
 

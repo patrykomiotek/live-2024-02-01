@@ -3,7 +3,7 @@
 import { Alert, Button, Header, Input } from '@jobboard/common-ui';
 
 import { createJobOfferAction } from './actions';
-import { CreateOfferDto, offerSchema } from './types';
+import { CreateOfferDto, createOfferSchema } from './types';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { use, useState, useTransition } from 'react';
@@ -15,7 +15,7 @@ export default function CreateOfferPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<CreateOfferDto>({
-    resolver: zodResolver(offerSchema),
+    resolver: zodResolver(createOfferSchema),
   });
   const router = useRouter();
   const [isPending, setTransition] = useTransition();

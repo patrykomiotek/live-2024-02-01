@@ -11,12 +11,13 @@ datasource db {
 }
 
 model JobOffer {
-  id          Int     @id @default(autoincrement())
-  public_id   String  @unique @default(uuid())
+  id          Int      @id @default(autoincrement())
+  public_id   String   @unique @default(uuid())
   title       String
   description String
   position    String
   salary      Float
   company     String
-  city        String? @db.VarChar(100)
+  city        String?  @db.VarChar(100)
+  created_at  DateTime @default(now())
 }
