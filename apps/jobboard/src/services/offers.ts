@@ -24,7 +24,17 @@ export const fetchJobOffers = async (query: string | null) => {
 };
 
 export const fetchOffer = async (publicId: JobOffer['public_id']) => {
-  return db.jobOffer.findUnique({ where: { public_id: publicId } });
+  return db.jobOffer.findUnique({
+    where: { public_id: publicId },
+    select: {
+      public_id: true,
+      city: true,
+      salary: true,
+      title: true,
+      description: true,
+      created_at: true,
+    },
+  }); //
 };
 
 const wait = async (ms: number) =>

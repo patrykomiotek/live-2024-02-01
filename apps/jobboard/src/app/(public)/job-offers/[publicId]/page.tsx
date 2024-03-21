@@ -5,6 +5,7 @@ import { Header } from '@jobboard/common-ui';
 import Link from 'next/link';
 import { fetchOffer } from '../../../../services/offers';
 import { notFound } from 'next/navigation';
+import { format } from 'date-fns';
 
 // export const metadata: Metadata = {
 //   title: 'Job Offers',
@@ -37,6 +38,7 @@ export default async function JobOfferPage({ params }: Params) {
         <h2 className="font-bold text-2xl">{offer.title}</h2>
         <p>{offer.description}</p>
         <p>Salary: {offer.salary} PLN</p>
+        <p>{format(offer.created_at, 'dd.MM.yyyy HH:mm')}</p>
       </div>
     </div>
   );
