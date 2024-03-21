@@ -3,6 +3,7 @@
 import db from '@jobboard/prisma-client';
 import { redirect } from 'next/navigation';
 import { CreateOfferDto, offerSchema } from './types';
+import { ZodError } from 'zod';
 
 // export const createJobOfferAction = async (data: FormData) => {
 export const createJobOfferAction = async (data: CreateOfferDto) => {
@@ -24,11 +25,21 @@ export const createJobOfferAction = async (data: CreateOfferDto) => {
   //   city,
   // });
 
-  const offer = offerSchema.parse(data);
+  try {
+    const offer = offerSchema.parse(data);
 
-  await db.jobOffer.create({ data: offer });
+    await db.jobOffer.create({ data: offer });
 
-  // redirect('/job-offers');
+    return { status: 'ok', message: 'created' }; // 201 created
+  } catch (error) {
+    if (error instanceof ZodError) {
+      // logger
+      return { status: 'error', message: 'sth' }; // 400
+    }
+    // } else if (error instanceof Prisma) { // TODO: check error type
+    //
+    // }
+  }
 
-  return { status: 'ok' };
+  return { status: 'error', message: 'sth' }; // 400
 };

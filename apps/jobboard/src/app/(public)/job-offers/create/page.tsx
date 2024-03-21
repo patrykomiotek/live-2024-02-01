@@ -1,12 +1,12 @@
 'use client';
 
-import { Button, Header, Input } from '@jobboard/common-ui';
+import { Alert, Button, Header, Input } from '@jobboard/common-ui';
 
 import { createJobOfferAction } from './actions';
 import { CreateOfferDto, offerSchema } from './types';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { use, useTransition } from 'react';
+import { use, useState, useTransition } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function CreateOfferPage() {
@@ -19,6 +19,7 @@ export default function CreateOfferPage() {
   });
   const router = useRouter();
   const [isPending, setTransition] = useTransition();
+  const [isError, setIsError] = useState(false);
 
   const handleOfferFormSubmit = async (data: CreateOfferDto) => {
     // console.log({ data });
@@ -27,12 +28,15 @@ export default function CreateOfferPage() {
     if (result.status === 'ok') {
       setTransition(() => router.push('/job-offers'));
       setTransition(() => router.refresh());
+    } else if (result.status === 'error') {
+      setIsError(true);
     }
   };
 
   return (
     <div>
       <Header>Create Offer</Header>
+      {isError && <Alert title="Application error" type="error" />}
       <form onSubmit={handleSubmit(handleOfferFormSubmit)} className="mt-6">
         <Input label="Title" {...register('title')} error={errors.title} />
         <Input
